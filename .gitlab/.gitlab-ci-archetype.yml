@@ -10,4 +10,8 @@ variables:
 .maven-deploy-archetype-from-project:
   image: ${PRIVATE_REGISTRY_PULL}/maven:${MAVEN_VERSION}
   script:
-    - mvn -s $M2_PROXY_XML $MAVEN_CLI_OPTS $MAVEN_CLI_DEPLOY $MAVEN_ARCHETYPE_OPTS pl $MAVEN_PROJECT_NAME archetype:create-from-project
+    - mvn -s $M2_PROXY_XML $MAVEN_CLI_OPTS $MAVEN_CLI_DEPLOY $MAVEN_ARCHETYPE_OPTS -pl $MAVEN_PROJECT_NAME archetype:create-from-project
+  artifacts:
+    paths:
+      - target/generated-sources/archetype
+    name: $MAVEN_PROJECT_NAME-$CI_COMMIT_SHORT_SHA
