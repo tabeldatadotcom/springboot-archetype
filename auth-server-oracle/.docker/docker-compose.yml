@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  oracle:
+    image: ${private_repository}/oracle/database:${oracle_version}
+    ports:
+      - "51521:1521"
+    environment:
+      - ORACLE_PWD=passwordnyaOracle2020
+    shm_size: 1g
+    volumes:
+      - ./oracle/setup/:/opt/oracle/scripts/setup
+      - ./oracle/startup:/opt/oracle/scripts/startup
+      - oracle-data:/opt/oracle/oradata
+volumes:
+  oracle-data:

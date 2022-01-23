@@ -1,0 +1,37 @@
+stages:
+  - .pre-build
+  - test
+  - build
+  - deploy
+
+variables:
+  MAVEN_VERSION: "3.6.3-jdk-11"
+  MAVEN_CLI_OPTS: "--show-version -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  MAVEN_CLI_DEPLOY: "-Dmaven_nexus_schema=${CI_MAVEN_NEXUS_SCHEMA} -Dmaven_nexus_host=${CI_MAVEN_NEXUS_HOST} -Dmaven_nexus_port=${CI_MAVEN_NEXUS_PORT} -Dmaven_nexus_docker_registry_hosted=${CI_MAVEN_NEXUS_DOCKER_REGISTRY_HOSTED} -Dmaven_nexus_docker_registry_public=${CI_MAVEN_NEXUS_DOCKER_REGISTRY_PUBLIC}"
+
+cache:
+  paths:
+    - .m2/repository
+
+include:
+  - local: '.gitlab/.gitlab-ci-archetype.yml'
+  - local: 'auth-server-oracle/.gitlab/.gitlab-ci-test.yml'
+
+maven:deploy:archetype:spring-boot:
+  stage: .pre-build
+  image: ${PRIVATE_REGISTRY_PULL}/maven:${MAVEN_VERSION}
+  script:
+    - mvn -N -s $M2_PROXY_XML $MAVEN_CLI_OPTS $MAVEN_CLI_DEPLOY deploy -DskipTests
+  tags:
+    - docker
+  only:
+    changes:
+      - pom.xml
+      - .gitlab-ci.yml
+    refs:
+      - master
+      - main
+  except:
+    refs:
+      - /-release/
+      - /-final/
