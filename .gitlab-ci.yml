@@ -45,3 +45,11 @@ maven:deploy:archetype:auth-server-oracle:
   only:
     - /-release/
 
+maven:deploy:archetype:resource-server-oracle:
+  stage: publish
+  extends: .maven-deploy-archetype-from-project
+  variables:
+    MAVEN_PROJECT_NAME: resource-server-oracle
+  only:
+    - /-release/
+

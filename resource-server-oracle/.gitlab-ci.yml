@@ -1,0 +1,45 @@
+stages:
+  - test
+  - build
+  - publish
+  - deploy
+
+default:
+  tags:
+    - docker
+
+variables:
+  MAVEN_JDK_VERSION: "3.6.3-jdk-11"
+  DOCKER_VERSION: "stable"
+  DOCKER_DIND_VERSION: "18.09-dind"
+  DOCKER_BUILD_ARGS_ENTRIPOINT: "--build-arg JAR_FILE=$JAR_FILE"
+
+include:
+  - local: '.gitlab/.gitlab-ci-test.yml'
+  - project: 'tabeldata.co.id/deployments'
+    ref: main
+    file: 'build.maven.gitlab-ci.yaml'
+
+#test:junit:
+#  stage: test
+#  extends: .test-junit
+#  script:
+#    - mvn -s $M2_SETTINGS_XML $MAVEN_CLI_OPTS clean jacoco:prepare-agent test jacoco:report
+#  after_script:
+#    - mvn -s $M2_SETTINGS_XML sonar:sonar -Dsonar.projectKey=$CI_PROJECT_ID-$CI_DEFAULT_BRANCH -Dsonar.host.url=$URL_SONAR -Dsonar.login=$AUTH_SONAR -Dmaven.test.failure.ignore=false
+#  only:
+#    - /-release/
+
+build:jar:
+  stage: build
+  extends: .build-jar
+  only:
+    - /-release/
+
+build:docker:
+  stage: build
+  extends: .build-docker
+  needs:
+    - build:jar
+  only:
+    - /-release/

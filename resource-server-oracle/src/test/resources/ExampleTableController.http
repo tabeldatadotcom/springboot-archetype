@@ -1,0 +1,29 @@
+GET http://{{host}}:{{port}}{{context-path}}/api/example/001/findById
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+### Find by id
+
+POST http://{{host}}:{{port}}{{context-path}}/api/example/created
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "name": "Dimas",
+  "active": false,
+  "counter": 1,
+  "currency": 0
+}
+
+### Save
+
+POST http://{{host}}:{{port}}{{context-path}}/api/example/datatables
+Content-Type: application/json
+Authorization: Bearer {{access_token}}
+
+{
+  "name": "dimas",
+  "active": false
+}
+
+### Datatables List
