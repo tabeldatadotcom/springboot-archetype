@@ -4,6 +4,10 @@ stages:
   - build
   - deploy
 
+default:
+  tags:
+    - docker
+
 variables:
   MAVEN_VERSION: "3.6.3-jdk-11"
   MAVEN_CLI_OPTS: "--show-version -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
@@ -22,8 +26,6 @@ maven:deploy:archetype:spring-boot:
   image: ${PRIVATE_REGISTRY_PULL}/maven:${MAVEN_VERSION}
   script:
     - mvn -N -s $M2_PROXY_XML $MAVEN_CLI_OPTS $MAVEN_CLI_DEPLOY deploy -DskipTests
-  tags:
-    - docker
   only:
     changes:
       - pom.xml
