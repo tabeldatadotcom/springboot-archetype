@@ -10,7 +10,7 @@
     <description>OAuth 2.0 Authentication and Authorization Server for Oracle Database</description>
 
     <parent>
-        <groupId>com.maryanto.dimas.projects</groupId>
+        <groupId>com.tabeldata.archetype</groupId>
         <artifactId>springboot-archetype</artifactId>
         <version>2.3.7.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->

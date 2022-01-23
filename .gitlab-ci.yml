@@ -19,6 +19,7 @@ cache:
 include:
   - local: '.gitlab/.gitlab-ci-archetype.yml'
   - local: 'auth-server-oracle/.gitlab/.gitlab-ci-test.yml'
+  - local: 'resource-server-oracle/.gitlab/.gitlab-ci-test.yml'
 
 maven:deploy:archetype:spring-boot:
   stage: .pre-build
