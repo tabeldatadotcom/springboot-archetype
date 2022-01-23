@@ -5,10 +5,9 @@ variables:
   MAVEN_VERSION: "3.6.3-jdk-11"
   MAVEN_CLI_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
   MAVEN_CLI_DEPLOY: "-Dmaven_nexus_schema=${CI_MAVEN_NEXUS_SCHEMA} -Dmaven_nexus_host=${CI_MAVEN_NEXUS_HOST} -Dmaven_nexus_port=${CI_MAVEN_NEXUS_PORT} -Dmaven_nexus_docker_registry_hosted=${CI_MAVEN_NEXUS_DOCKER_REGISTRY_HOSTED} -Dmaven_nexus_docker_registry_public=${CI_MAVEN_NEXUS_DOCKER_REGISTRY_PUBLIC}"
+  MAVEN_ARCHETYPE_OPTS: "-DarchetypeProperties=archetype.properties -Darchetype.postPhase=deploy"
 
 .maven-deploy-archetype-from-project:
   image: ${PRIVATE_REGISTRY_PULL}/maven:${MAVEN_VERSION}
-  before_script:
-    - mvn -s $M2_PROXY_XML $MAVEN_CLI_OPTS versions:set -DnewVersion=$CI_COMMIT_SHORT_SHA
   script:
-    - mvn -s $M2_PROXY_XML $MAVEN_CLI_OPTS $MAVEN_CLI_DEPLOY archetype:create-from-project -DarchetypeProperties=archetype.properties -Darchetype.postPhase=deploy
+    - mvn -s $M2_PROXY_XML $MAVEN_CLI_OPTS $MAVEN_CLI_DEPLOY $MAVEN_ARCHETYPE_OPTS pl $MAVEN_PROJECT_NAME archetype:create-from-project

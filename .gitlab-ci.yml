@@ -1,8 +1,7 @@
 stages:
   - .pre-build
   - test
-  - build
-  - deploy
+  - publish
 
 default:
   tags:
@@ -37,3 +36,12 @@ maven:deploy:archetype:spring-boot:
     refs:
       - /-release/
       - /-final/
+
+maven:deploy:archetype:auth-server-oracle:
+  stage: publish
+  extends: .maven-deploy-archetype-from-project
+  variables:
+    MAVEN_PROJECT_NAME: auth-server-oracle
+  only:
+    - /-release/
+
