@@ -19,6 +19,7 @@ cache:
 include:
   - local: '.gitlab/.gitlab-ci-archetype.yml'
   - local: 'auth-server-oracle/.gitlab/.gitlab-ci-test.yml'
+  - local: 'auth-server-postgres/.gitlab/.gitlab-ci-test.yml'
   - local: 'resource-server-oracle/.gitlab/.gitlab-ci-test.yml'
 
 maven:deploy:archetype:spring-boot:
@@ -38,6 +39,20 @@ maven:deploy:archetype:spring-boot:
       - /-release/
       - /-final/
 
+## Testing environment
+maven:test:archetype:auth-server-postgres:
+  stage: test
+  variables:
+    MAVEN_PROJECT_NAME: auth-server-postgres
+  extends: .test-junit-auth-postgres
+  script:
+    - mvn -pl $MAVEN_PROJECT_NAME -s $M2_SETTINGS_XML $MAVEN_CLI_OPTS clean jacoco:prepare-agent test jacoco:report
+  #  after_script:
+  #    - mvn -s $M2_SETTINGS_XML sonar:sonar -Dsonar.projectKey=$CI_PROJECT_ID-$CI_DEFAULT_BRANCH -Dsonar.host.url=$URL_SONAR -Dsonar.login=$AUTH_SONAR -Dmaven.test.failure.ignore=false
+  only:
+    - /-release/
+
+## Deploy archetype
 maven:deploy:archetype:auth-server-oracle:
   stage: publish
   extends: .maven-deploy-archetype-from-project
@@ -54,3 +69,10 @@ maven:deploy:archetype:resource-server-oracle:
   only:
     - /-release/
 
+maven:deploy:archetype:auth-server-postgres:
+  stage: publish
+  extends: .maven-deploy-archetype-from-project
+  variables:
+    MAVEN_PROJECT_NAME: auth-server-postgres
+  only:
+    - /-release/

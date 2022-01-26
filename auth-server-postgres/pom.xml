@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>auth-server-oracle</artifactId>
+    <artifactId>auth-server-postgres</artifactId>
     <packaging>jar</packaging>
 
-    <name>Oauth2 Server for Oracle 18c Database</name>
-    <description>OAuth 2.0 Authentication and Authorization Server for Oracle Database</description>
+    <name>Oauth2 Server for PostgreSQL Database</name>
+    <description>OAuth 2.0 Authentication and Authorization Server for PostgreSQL Database</description>
 
     <parent>
         <groupId>com.tabeldata.archetype</groupId>
@@ -88,10 +88,10 @@
             <version>2.29.1</version>
         </dependency>
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc7</artifactId>
-            <version>12.2.0.1</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>

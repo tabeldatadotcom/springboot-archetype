@@ -1,0 +1,68 @@
+application:
+  developer:
+    name: @team.name@
+    email: @team.email@
+    organisation: @team.organisation@
+    organisation-url: @team.organization.url@
+  license:
+    name: @license.name@
+    url: @license.url@
+server:
+  port: ${APPLICATION_PORT:8080}
+# spring configuration
+spring:
+  application:
+    name: @project.artifactId@
+    version: @project.version@
+    fullname: @project.name@
+  mvc:
+    dispatch-options-request: true
+  thymeleaf:
+    enable-spring-el-compiler: true
+    enabled: true
+    cache: false
+    check-template: true
+    encoding: UTF-8
+    mode: HTML
+    suffix: .html
+    servlet:
+      content-type: text/html
+    check-template-location: true
+    template-resolver-order: 0
+  datasource:
+    url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:oauth2}
+    username: ${DATABASE_USER:oauth2}
+    password: ${DATABASE_PASSWORD:oauth2}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        format_sql: true
+        enable_lazy_load_no_trans: true
+        id:
+          new_generator_mappings: false
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        globally_quoted_identifiers: true
+        temp:
+          use_jdbc_metadata_defaults: false
+  flyway:
+    encoding: UTF-8
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:/db/migration
+    schemas: public,oauth,auth,resource,component
+    clean-disabled: false
+    clean-on-validation-error: true
+    connect-retries: 3
+  queries:
+    authentication: select * from auth.authentication(?)
+    authorization: select * from auth.authorization(?)
+logging:
+  level:
+    org.springframework: ERROR
+    com.tabeldata: ${LOG_LEVEL:DEBUG}

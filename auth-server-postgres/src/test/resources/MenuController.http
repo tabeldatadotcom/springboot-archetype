@@ -1,0 +1,4 @@
+GET http://{{host}}:{{port}}{{context-path}}/api/component/menu/webapp/findByModule
+Authorization: Bearer {{access_token}}
+
+### Get access Menu
