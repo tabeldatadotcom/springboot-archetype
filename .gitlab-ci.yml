@@ -46,7 +46,7 @@ maven:test:archetype:auth-server-postgres:
     MAVEN_PROJECT_NAME: auth-server-postgres
   extends: .test-junit-auth-postgres
   script:
-    - mvn -pl $MAVEN_PROJECT_NAME -s $M2_SETTINGS_XML $MAVEN_CLI_OPTS clean jacoco:prepare-agent test jacoco:report
+    - mvn -pl $MAVEN_PROJECT_NAME -s $M2_PROXY_XML $MAVEN_CLI_OPTS clean jacoco:prepare-agent test jacoco:report
   #  after_script:
   #    - mvn -s $M2_SETTINGS_XML sonar:sonar -Dsonar.projectKey=$CI_PROJECT_ID-$CI_DEFAULT_BRANCH -Dsonar.host.url=$URL_SONAR -Dsonar.login=$AUTH_SONAR -Dmaven.test.failure.ignore=false
   only:
