@@ -3,7 +3,7 @@ variables:
   MAVEN_CLI_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
 
 .test-junit-auth-oracle:
-  image: ${PRIVATE_REGISTRY_PULL}/maven:${MAVEN_JDK_VERSION}
+  image: ${PRIVATE_REGISTRY_PULL}/maven:${MAVEN_VERSION}
   services:
     - name: ${PRIVATE_REGISTRY_PULL}/oracle/database:${ORACLE_VERSION}
       alias: oracledb
