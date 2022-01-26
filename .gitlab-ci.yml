@@ -9,7 +9,7 @@ default:
 
 variables:
   MAVEN_VERSION: "3.6.3-jdk-11"
-  MAVEN_CLI_OPTS: "--show-version -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  MAVEN_CLI_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -U"
   MAVEN_CLI_DEPLOY: "-Dmaven_nexus_schema=${CI_MAVEN_NEXUS_SCHEMA} -Dmaven_nexus_host=${CI_MAVEN_NEXUS_HOST} -Dmaven_nexus_port=${CI_MAVEN_NEXUS_PORT} -Dmaven_nexus_docker_registry_hosted=${CI_MAVEN_NEXUS_DOCKER_REGISTRY_HOSTED} -Dmaven_nexus_docker_registry_public=${CI_MAVEN_NEXUS_DOCKER_REGISTRY_PUBLIC}"
 
 cache:
