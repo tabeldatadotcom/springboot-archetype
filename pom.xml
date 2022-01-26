@@ -44,6 +44,7 @@
         <module>auth-server-oracle</module>
         <module>resource-server-oracle</module>
         <module>auth-server-postgres</module>
+        <module>resource-server-postgres</module>
     </modules>
 
     <developers>

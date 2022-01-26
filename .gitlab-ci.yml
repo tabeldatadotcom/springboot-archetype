@@ -21,6 +21,7 @@ include:
   - local: 'auth-server-oracle/.gitlab/.gitlab-ci-test.yml'
   - local: 'auth-server-postgres/.gitlab/.gitlab-ci-test.yml'
   - local: 'resource-server-oracle/.gitlab/.gitlab-ci-test.yml'
+  - local: 'resource-server-postgres/.gitlab/.gitlab-ci-test.yml'
 
 maven:deploy:archetype:spring-boot:
   stage: .pre-build
@@ -57,8 +58,25 @@ maven:test:archetype:auth-server-postgres:
   only:
     - /-release/
 
+maven:test:archetype:resource-server-postgres:
+  stage: test
+  variables:
+    MAVEN_PROJECT_NAME: resource-server-postgres
+  extends: .test-junit-resource-postgres
+  script:
+    - mvn -pl $MAVEN_PROJECT_NAME -s $M2_PROXY_XML $MAVEN_CLI_OPTS clean jacoco:prepare-agent test jacoco:report
+  #  after_script:
+  #    - mvn -s $M2_SETTINGS_XML sonar:sonar -Dsonar.projectKey=$CI_PROJECT_ID-$CI_DEFAULT_BRANCH -Dsonar.host.url=$URL_SONAR -Dsonar.login=$AUTH_SONAR -Dmaven.test.failure.ignore=false
+  artifacts:
+    reports:
+      junit:
+        - $MAVEN_PROJECT_NAME/target/surefire-reports/TEST-*.xml
+        - $MAVEN_PROJECT_NAME/target/failsafe-reports/TEST-*.xml
+  only:
+    - /-release/
+
 ## Deploy archetype
-maven:deploy:archetype:auth-server-oracle:
+maven:deploy:archetype:auth-oracle:
   stage: publish
   extends: .maven-deploy-archetype-from-project
   variables:
@@ -66,7 +84,7 @@ maven:deploy:archetype:auth-server-oracle:
   only:
     - /-release/
 
-maven:deploy:archetype:resource-server-oracle:
+maven:deploy:archetype:resource-oracle:
   stage: publish
   extends: .maven-deploy-archetype-from-project
   variables:
@@ -74,10 +92,18 @@ maven:deploy:archetype:resource-server-oracle:
   only:
     - /-release/
 
-maven:deploy:archetype:auth-server-postgres:
+maven:deploy:archetype:auth-postgres:
   stage: publish
   extends: .maven-deploy-archetype-from-project
   variables:
     MAVEN_PROJECT_NAME: auth-server-postgres
+  only:
+    - /-release/
+
+maven:deploy:archetype:resource-postgres:
+  stage: publish
+  extends: .maven-deploy-archetype-from-project
+  variables:
+    MAVEN_PROJECT_NAME: resource-server-postgres
   only:
     - /-release/

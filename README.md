@@ -25,3 +25,4 @@ Project type dif by 2 modules, Authorization Serve & Resource Server
 | no   | Database           | Authorization Server                   | Resource Server                                  |
 | :--- | :---               | :---                                   | :---                                             |
 | 1    | Oracle Database    |[auth-server](./auth-server-oracle)     | [resource-server](./resource-server-oracle)      |
+| 2    | PostgreSQL Database|[auth-server](./auth-server-postgres)   | [resource-server](./resource-server-postgres)    |
