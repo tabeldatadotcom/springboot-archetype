@@ -15,8 +15,6 @@ variables:
     DATABASE_PASSWORD: $ORACLE_PWD
     DATABASE_SID: xe
     DATABASE_PORT: 1521
-  before_script:
-    - mvn -s $M2_PROXY_XML $MAVEN_CLI_OPTS versions:set -DnewVersion=$CI_COMMIT_SHORT_SHA
 #  script:
 #    - mvn -s $M2_PROXY_XML $MAVEN_CLI_OPTS clean jacoco:prepare-agent test jacoco:report
 #  after_script:
