@@ -49,6 +49,11 @@ maven:test:archetype:auth-server-postgres:
     - mvn -pl $MAVEN_PROJECT_NAME -s $M2_PROXY_XML $MAVEN_CLI_OPTS clean jacoco:prepare-agent test jacoco:report
   #  after_script:
   #    - mvn -s $M2_SETTINGS_XML sonar:sonar -Dsonar.projectKey=$CI_PROJECT_ID-$CI_DEFAULT_BRANCH -Dsonar.host.url=$URL_SONAR -Dsonar.login=$AUTH_SONAR -Dmaven.test.failure.ignore=false
+  artifacts:
+    reports:
+      junit:
+        - $MAVEN_PROJECT_NAME/target/surefire-reports/TEST-*.xml
+        - $MAVEN_PROJECT_NAME/target/failsafe-reports/TEST-*.xml
   only:
     - /-release/
 
