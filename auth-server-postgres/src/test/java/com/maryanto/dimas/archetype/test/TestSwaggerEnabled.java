@@ -10,7 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @Slf4j
@@ -24,7 +24,7 @@ public class TestSwaggerEnabled {
     @Test
     public void testSwaggerApi() throws Exception {
         ResultActions resultActions = mockMvc.perform(
-                post("/v2/api-docs")
+                get("/v2/api-docs")
                         .accept("application/json;charset=UTF-8"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(content().contentType("application/json;charset=UTF-8"));
