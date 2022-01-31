@@ -1,15 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-server
+  name: "${artifactId}"
 spec:
   selector:
-    app: auth-server
-    env: "${CI_ENVIRONMENT_SLUG}"
-    tier: backend
+    app: "${artifactId}"
   ports:
     - port: 8080
       targetPort: 8080
-      name: auth-server
+      name: http
       protocol: TCP
   type: NodePort

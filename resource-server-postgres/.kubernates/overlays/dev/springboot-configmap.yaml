@@ -1,15 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: auth-server-config
-  labels:
-    app: auth-server
-    env: "${CI_ENVIRONMENT_SLUG}"
-    tier: backend
+  name: "${artifactId}"
 data:
   DATABASE_HOST: "${CI_DATABASE_HOST}"
   DATABASE_PORT: "${CI_DATABASE_PORT}"
   DATABASE_USER: "${CI_DATABASE_USER}"
   DATABASE_PASSWORD: "${CI_DATABASE_PASSWORD}"
   DATABASE_NAME: "${CI_DATABASE_NAME}"
-  FLYWAY_ENABLED: true
