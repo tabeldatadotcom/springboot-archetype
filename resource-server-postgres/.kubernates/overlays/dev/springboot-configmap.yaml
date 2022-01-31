@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: "${artifactId}"
+  name: ${artifactId}
 data:
   DATABASE_HOST: "${CI_DATABASE_HOST}"
   DATABASE_PORT: "${CI_DATABASE_PORT}"

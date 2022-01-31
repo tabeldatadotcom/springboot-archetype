@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "${artifactId}"
+  name: ${artifactId}
   labels:
-    app: "${artifactId}"
+    app: ${artifactId}
 spec:
   replicas: 1
   template:
     metadata:
-      name: "${artifactId}"
+      name: ${artifactId}
       labels:
-        app: "${artifactId}"
+        app: ${artifactId}
     spec:
       containers:
-        - name: resource-server
-          image: "tabeldata.ip-dynamic.com:8087/${groupId}/${artifactId}:${version}"
+        - name: ${artifactId}
+          image: "tabeldata.ip-dynamic.com:8087/${project.groupId}/${artifactId}:${project.version}"
           imagePullPolicy: "Always"
           envFrom:
             - configMapRef:
-                name: "${artifactId}"
+                name: ${artifactId}
   selector:
     matchLabels:
-      app: "${artifactId}"
+      app: ${artifactId}
