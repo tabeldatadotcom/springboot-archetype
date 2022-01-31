@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: ${artifactId}
-          image: "tabeldata.ip-dynamic.com:8087/${groupId}/${artifactId}:${version}"
+          image: "${groupId}/${artifactId}:${version}"
           imagePullPolicy: "Always"
           envFrom:
             - configMapRef:
