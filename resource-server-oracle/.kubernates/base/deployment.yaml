@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${artifactId}
+  labels:
+    app: ${artifactId}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: ${artifactId}
+      labels:
+        app: ${artifactId}
+    spec:
+      containers:
+        - name: ${artifactId}
+          image: "${groupId}/${artifactId}:${version}"
+          imagePullPolicy: "Always"
+          envFrom:
+            - configMapRef:
+                name: ${artifactId}
+  selector:
+    matchLabels:
+      app: ${artifactId}
