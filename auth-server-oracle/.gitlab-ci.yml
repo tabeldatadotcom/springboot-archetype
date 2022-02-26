@@ -1,4 +1,5 @@
 stages:
+  - pre-build
   - test
   - build
   - publish
@@ -16,9 +17,10 @@ variables:
 
 include:
   - local: '.gitlab/.gitlab-ci-test.yml'
-  - project: 'tabeldata.co.id/deployments'
-    ref: main
-    file: 'build.maven.gitlab-ci.yaml'
+  - remote: 'https://raw.githubusercontent.com/dimMaryanto93/gitlab-cicd-templates/main/build.maven.gitlab-ci.yml'
+  - remote: 'https://raw.githubusercontent.com/dimMaryanto93/gitlab-cicd-templates/main/build.docker.gitlab-ci.yml'
+  - remote: 'https://raw.githubusercontent.com/dimMaryanto93/gitlab-cicd-templates/main/trigger.deploy.gitlab-ci.yml'
+
 
 #test:junit:
 #  stage: test
@@ -30,16 +32,24 @@ include:
 #  only:
 #    - /-release/
 
-build:jar:
-  stage: build
-  extends: .build-jar
-  only:
-    - /-release/
-
 build:docker:
   stage: build
   extends: .build-docker
+  variables:
+    DOCKER_BUILD_ARGS_ENTRIPOINT: "--build-arg JAR_FILE=$JAR_FILE"
   needs:
     - build:jar
+    - get-fact:project:info
+  only:
+    - /-release/
+
+trigger_deploy:
+  extends: .trigger_pipeline
+  variables:
+    CI_DEFAULT_TRIGGER_BRANCH: master
+  stage: deploy
+  needs:
+    - get-fact:project:info
+    - build:docker
   only:
     - /-release/
