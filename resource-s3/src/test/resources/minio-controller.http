@@ -1,0 +1,39 @@
+POST {{host}}:{{port}}{{context-path}}/api/v1/minio/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Authorization: Bearer {{access_token}}
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="honda-cbr1000rr.jpg"
+Content-Type: application/octet-stream
+
+< ./honda-cbr1000rr.jpg
+
+--WebAppBoundary
+Content-Disposition: form-data; name="folder";
+Content-Type: application/x-www-form-urlencoded
+
+images/profile
+
+### upload file
+
+POST {{host}}:{{port}}{{context-path}}/api/v1/minio/preview
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "objectId": "images/profile/b9b03505-6dbc-4580-aa26-e2e6912c948a.jpg",
+  "duration": 1,
+  "unit": "HOURS"
+}
+
+### presigned url from object id
+
+POST {{host}}:{{port}}{{context-path}}/api/v1/minio/download
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "objectId": "images/profile/b9b03505-6dbc-4580-aa26-e2e6912c948a.jpg"
+}
+
+### presigned url from object id

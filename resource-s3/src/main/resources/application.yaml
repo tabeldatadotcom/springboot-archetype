@@ -24,7 +24,9 @@ server:
   port: ${APPLICATION_PORT:1234}
 storage:
   files:
-    location: ${STORAGE_FILE_LOCATION:./target/uploads}
+    location:
+      upload: ${STORAGE_UPLOAD_FILE_LOCATION:./target/uploads}
+      download: ${STORAGE_DOWNLOAD_FILE_LOCATION:./target/download}
 spring:
   application:
     name: @project.artifactId@
