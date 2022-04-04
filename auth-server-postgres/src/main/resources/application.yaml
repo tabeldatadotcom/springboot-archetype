@@ -64,5 +64,5 @@ spring:
     authorization: select * from auth.authorization(?)
 logging:
   level:
-    org.springframework: ERROR
+    org.springframework: ${SPRING_LOG_LEVEL:ERROR}
     com.tabeldata: ${LOG_LEVEL:DEBUG}

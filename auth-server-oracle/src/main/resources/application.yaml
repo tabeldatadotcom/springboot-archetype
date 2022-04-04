@@ -62,5 +62,5 @@ spring:
     authorization: select USERNAME AS username, AUTHORITY as authority from table(AUTH_AUTHORIZATION(?))
 logging:
   level:
-    org.springframework: ERROR
+    org.springframework: ${SPRING_LOG_LEVEL:ERROR}
     com.tabeldata: ${LOG_LEVEL:DEBUG}

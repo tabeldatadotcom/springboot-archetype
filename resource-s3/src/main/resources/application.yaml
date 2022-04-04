@@ -1,0 +1,42 @@
+application:
+  developer:
+    name: @team.name@
+    email: @team.email@
+    organisation: @team.organisation@
+    organisation-url: @team.organization.url@
+  license:
+    name: @license.name@
+    url: @license.url@
+minio:
+  bucket:
+    name: ${MINIO_BUCKET_NAME:example-apps}
+  endpoint:
+    url: ${MINIO_ENPOINT_URL:http://localhost}
+    port: ${MINIO_ENDPOINT_PORT:9000}
+    secure: ${MINIO_ENDPOINT_SECURE:false}
+  region:
+    name: ${MINIO_REGION_NAME:sa-east-1}
+    enabled: ${MINIO_REGION_ENABLE:false}
+  credential:
+    access_key: ${MINIO_CRED_ACCESS_KEY:admin}
+    secret_key: ${MINIO_CRED_SECRET_KEY:admin123}
+server:
+  port: ${APPLICATION_PORT:1234}
+spring:
+  application:
+    name: @project.artifactId@
+    version: @project.version@
+    fullname: @project.name@
+  mvc:
+    dispatch-options-request: true
+    dispatch-trace-request: false
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: ${SERVER_MULTIPART_MAX_FILE_SIZE:100MB}
+      max-request-size: ${SERVER_MULTIPART_MAX_REQUEST_SIZE:200MB}
+      resolve-lazily: true
+logging:
+  level:
+    org.springframework: ${SPRING_LOG_LEVEL:ERROR}
+    com.tabeldata: ${LOG_LEVEL:DEBUG}

@@ -1,0 +1,24 @@
+variables:
+  MAVEN_VERSION: "3.6.3-jdk-11"
+  MAVEN_CLI_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+
+.test-junit-resource-postgres:
+  image: ${PRIVATE_REGISTRY_PULL}/maven:${MAVEN_VERSION}
+  services:
+    - name: ${PRIVATE_REGISTRY_PULL}/minio/minio
+      command: [ "server", "/data", "--console-address", ":9001" ]
+      alias: minio
+  variables:
+    - MINIO_ROOT_USER=admin
+    - MINIO_ROOT_PASSWORD=admin123
+    - MINIO_SITE_NAME=example-apps
+    - MINIO_SITE_REGION=sa-east-1
+
+#  script:
+#    - mvn -s $M2_PROXY_XML $MAVEN_CLI_OPTS clean jacoco:prepare-agent test jacoco:report
+#  after_script:
+#    - mvn -s $M2_PROXY_XML sonar:sonar -Dsonar.projectKey=$CI_PROJECT_ID-$CI_DEFAULT_BRANCH -Dsonar.host.url=$URL_SONAR -Dsonar.login=$AUTH_SONAR -Dmaven.test.failure.ignore=false
+#  tags:
+#    - docker
+#  only:
+#    - /-release/

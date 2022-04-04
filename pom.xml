@@ -38,6 +38,8 @@
         <maven_nexus_port>8081</maven_nexus_port>
         <maven_nexus_docker_registry_hosted>8087</maven_nexus_docker_registry_hosted>
         <maven_nexus_docker_registry_public>8087</maven_nexus_docker_registry_public>
+        <minio.version>8.2.1</minio.version>
+        <commons-io.version>2.11.0</commons-io.version>
     </properties>
 
     <modules>
@@ -45,6 +47,7 @@
         <module>resource-server-oracle</module>
         <module>auth-server-postgres</module>
         <module>resource-server-postgres</module>
+        <module>resource-s3</module>
     </modules>
 
     <developers>

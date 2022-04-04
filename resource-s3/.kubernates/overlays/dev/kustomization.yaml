@@ -6,10 +6,7 @@ resources:
 
 patches:
   - path: springboot-deployment.yaml
-  - path: postgres-deployment.yaml
-
-components:
-  - ../../components/oracle
+  - path: springboot-configmap.yaml
 
 commonAnnotations:
   app.gitlab.com/app: ${CI_PROJECT_PATH_SLUG}

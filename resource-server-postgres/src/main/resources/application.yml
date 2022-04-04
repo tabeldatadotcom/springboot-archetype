@@ -58,5 +58,5 @@ spring:
     template-resolver-order: 0
 logging:
   level:
-    org.springframework: ERROR
+    org.springframework: ${SPRING_LOG_LEVEL:ERROR}
     com.tabeldata: ${LOG_LEVEL:DEBUG}

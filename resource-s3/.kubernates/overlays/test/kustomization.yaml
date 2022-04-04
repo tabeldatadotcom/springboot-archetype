@@ -9,7 +9,7 @@ patches:
   - path: postgres-deployment.yaml
 
 components:
-  - ../../components/oracle
+  - ../../components/postgres
 
 commonAnnotations:
   app.gitlab.com/app: ${CI_PROJECT_PATH_SLUG}
