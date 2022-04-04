@@ -36,4 +36,4 @@ Content-Type: application/json
   "objectId": "images/profile/b9b03505-6dbc-4580-aa26-e2e6912c948a.jpg"
 }
 
-### presigned url from object id
+### dowload file as stream/octet
