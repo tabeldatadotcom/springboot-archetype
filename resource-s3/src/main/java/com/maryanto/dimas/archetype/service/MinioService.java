@@ -78,7 +78,7 @@ public class MinioService {
                         .append(File.separator)
                         .append(UUID.randomUUID())
                         .append(".")
-                        .append(FilenameUtils.getExtension(file.getName())).toString())
+                        .append(FilenameUtils.getExtension(newFile.getName())).toString())
                 .build());
         return response;
     }
