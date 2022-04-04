@@ -9,7 +9,7 @@ application:
     url: @license.url@
 minio:
   bucket:
-    name: ${MINIO_BUCKET_NAME:example-apps}
+    name: ${MINIO_BUCKET_NAME:@project.artifactId@}
   endpoint:
     url: ${MINIO_ENPOINT_URL:http://localhost}
     port: ${MINIO_ENDPOINT_PORT:9000}
@@ -22,6 +22,9 @@ minio:
     secret_key: ${MINIO_CRED_SECRET_KEY:admin123}
 server:
   port: ${APPLICATION_PORT:1234}
+storage:
+  files:
+    location: ${STORAGE_FILE_LOCATION:./target/uploads}
 spring:
   application:
     name: @project.artifactId@
